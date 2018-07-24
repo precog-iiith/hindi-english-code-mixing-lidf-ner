@@ -6,6 +6,9 @@ export DEV_SOURCES=`realpath $2`
 export PRED_FILE=`realpath $3`
 export MODEL_CKP=`realpath $4`
 
+CURR_DIR=`pwd`
+
+cd ${TRANSLITERATION_DIR}
 cd seq2seq
 
 python -m bin.infer \
@@ -19,4 +22,5 @@ python -m bin.infer \
       source_files:
         - $DEV_SOURCES" \
   --batch_size 1024 > $PRED_FILE
-cd ..
+cd ${CURR_DIR}
+
