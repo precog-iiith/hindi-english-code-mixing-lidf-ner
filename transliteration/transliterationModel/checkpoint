@@ -1,0 +1,3 @@
+model_checkpoint_path: "/home/kushagras/transliteration/GRU_3_3_AttentionLayerBahdanau_NonReverse_InitialStateBridge_LargeEmbedding/model.ckpt-66053"
+all_model_checkpoint_paths: "/home/kushagras/transliteration/GRU_3_3_AttentionLayerBahdanau_NonReverse_InitialStateBridge_LargeEmbedding/model.ckpt-66053"
+all_model_checkpoint_paths: "/home/kushagras/transliteration/GRU_3_3_AttentionLayerBahdanau_NonReverse_InitialStateBridge_LargeEmbedding/model.ckpt-66053"
