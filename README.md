@@ -9,3 +9,5 @@ Repository contains<br />
 (ii)  Language identification tool (English, Hindi, Rest)<br />
 (iii) Named Entity Recogntion tool (Person, Location, Organisation)<br />
 <br />
+<br />
+Please check the Readme of individual modules for instructions to set up. <br />
