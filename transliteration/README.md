@@ -1,11 +1,10 @@
-Seq2Seq model for transliterating Roman text into Devanagari text.
+Seq2Seq model for transliterating Roman text into Devanagari text. Uses Google Seq2Seq 
 
 Requires tensoflow==1.1.0
 
-Step 1. Setup google Seq2Seq requirements by using seq2seq/requirements.txt <br />
-Step 2. Setup transliteration requirements by using requirements.txt <br />
-Step 3. Change 'vocab\_target' and 'vocab\_source' path in transliterationModel/train\_options.json <br />
+Step 1. Setup transliteration requirements by using requirements.txt <br />
+Step 2. Change 'vocab\_target' and 'vocab\_source' file path prefix in transliterationModel/train\_options.json to local paths<br />
 
-Check out demo.py for a running example.
+Check out demo.py for a running example. Delete wordsToTransliterate.txt and wordsTransliterated.txt before running.
 
 
