@@ -10,4 +10,4 @@ Repository contains<br />
 (iii) Named Entity Recogntion tool (Person, Location, Organisation)<br />
 <br />
 <br />
-Please check the Readme of individual modules for instructions to set up. <br />
+Please use the requirements.txt file in a virtualenv to avoid dependecy issues. <br />
