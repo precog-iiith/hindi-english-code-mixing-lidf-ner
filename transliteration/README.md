@@ -5,6 +5,6 @@ Requires tensoflow==1.1.0
 Step 1. Setup transliteration requirements by using requirements.txt <br />
 Step 2. Change 'vocab\_target' and 'vocab\_source' file path prefix in transliterationModel/train\_options.json to local paths<br />
 
-Check out demo.py for a running example. Delete wordsToTransliterate.txt and wordsTransliterated.txt before running.
+Check out demo.py for a running example. Delete wordsToTransliterate.txt and wordsTransliterated.txt before running. <br />
 
-
+export TRANSLITERATION_DIR={{local path to repo}}/Hindi_English_Code_Switching_Tools/transliteration < br />
