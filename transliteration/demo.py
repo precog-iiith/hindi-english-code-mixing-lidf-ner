@@ -79,3 +79,6 @@ print 'Original       :', ' '.join(map(lambda x : x[0], text))
 print 'Cleaned        :', ' '.join(map(lambda x : x[1], text))
 print 'Transliterated :', ' '.join(map(lambda x : x[4], text))
 
+
+for i in text:
+    print i

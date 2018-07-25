@@ -35,7 +35,11 @@ allTweets = \
   ['one'],
   ['myself'],
   ['.']
- ]
+ ],
+ [
+  ['they'], ['have'], ['night'], ['built'], ['what'], ['what'], ['has'], ['pagal']
+ ],
+[['they'], ['karega'], ['that'], ['built'], ['nhi']]
 ]
 
 
