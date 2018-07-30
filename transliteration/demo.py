@@ -45,7 +45,8 @@ print 'Running transliteration script'
 #
 #	Run Transliteration model (bash script pred.sh)
 #
-process = subprocess.Popen('bash pred.sh ./transliterationModel/ wordsToTransliterate.txt wordsTransliterated.txt ./transliterationModel/model.ckpt-66053', shell=True, stdout=subprocess.PIPE)
+import os
+process = subprocess.Popen('bash pred.sh ./transliterationModel/ wordsToTransliterate.txt wordsTransliterated.txt ' + os.environ['HINGLISH_ROOT_DIR'] + '/transliteration/transliterationModel/model.ckpt-66053', shell=True, stdout=subprocess.PIPE)
 process.wait()
 #
 ##################################################################

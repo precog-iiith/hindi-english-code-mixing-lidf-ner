@@ -1,3 +1,5 @@
+import sys
+import os
 import ast
 import subprocess
 import editdistance
@@ -43,6 +45,11 @@ allTweets = \
 ]
 
 
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        # Tweets being passed
+        allTweets = ast.literal_eval(sys.argv[1])
+
 # Encoding for transliteration
 
 devanagariChars   = [u'\u0900', u'\u0901', u'\u0902', u'\u0903', u'\u0904', u'\u0905', u'\u0906', u'\u0907', u'\u0908', u'\u0909', u'\u090a', u'\u090b', u'\u090c', u'\u090d', u'\u090e', u'\u090f', u'\u0910', u'\u0911', u'\u0912', u'\u0913', u'\u0914', u'\u0915', u'\u0916', u'\u0917', u'\u0918', u'\u0919', u'\u091a', u'\u091b', u'\u091c', u'\u091d', u'\u091e', u'\u091f', u'\u0920', u'\u0921', u'\u0922', u'\u0923', u'\u0924', u'\u0925', u'\u0926', u'\u0927', u'\u0928', u'\u0929', u'\u092a', u'\u092b', u'\u092c', u'\u092d', u'\u092e', u'\u092f', u'\u0930', u'\u0931', u'\u0932', u'\u0933', u'\u0934', u'\u0935', u'\u0936', u'\u0937', u'\u0938', u'\u0939', u'\u093a', u'\u093b', u'\u093c', u'\u093d', u'\u093e', u'\u093f', u'\u0940', u'\u0941', u'\u0942', u'\u0943', u'\u0944', u'\u0945', u'\u0946', u'\u0947', u'\u0948', u'\u0949', u'\u094a', u'\u094b', u'\u094c', u'\u094d', u'\u094e', u'\u094f', u'\u0950', u'\u0951', u'\u0952', u'\u0953', u'\u0954', u'\u0955', u'\u0956', u'\u0957', u'\u0958', u'\u0959', u'\u095a', u'\u095b', u'\u095c', u'\u095d', u'\u095e', u'\u095f', u'\u0960', u'\u0961', u'\u0962', u'\u0963', u'\u0964', u'\u0965', u'\u0966', u'\u0967', u'\u0968', u'\u0969', u'\u096a', u'\u096b', u'\u096c', u'\u096d', u'\u096e', u'\u096f', u'\u0970', u'\u0971', u'\u0972', u'\u0973', u'\u0974', u'\u0975', u'\u0976', u'\u0977', u'\u0978', u'\u0979', u'\u097a', u'\u097b', u'\u097c', u'\u097d', u'\u097e', u'\u097f']
@@ -50,7 +57,7 @@ englishCharacters = [u'a', u'b', u'c', u'd', u'e', u'f', u'g', u'h', u'i', u'j',
 
 maxlen = 30
 
-with open('../transliteration/transliterationModel/englishMap', 'r') as fp:
+with open(os.environ['HINGLISH_ROOT_DIR'] + '/transliteration/transliterationModel/englishMap', 'r') as fp:
     EnglishMap = fp.read()
     EnglishMap = ast.literal_eval(EnglishMap)
 
@@ -58,7 +65,7 @@ with open('../transliteration/transliterationModel/englishMap', 'r') as fp:
     for key in EnglishMap:
         revEnglishMap[EnglishMap[key]] = key
         
-with open('../transliteration/transliterationModel/hindiMap', 'r') as fp:
+with open(os.environ['HINGLISH_ROOT_DIR'] + '/transliteration/transliterationModel/hindiMap', 'r') as fp:
     HindiMap = fp.read()
     HindiMap = ast.literal_eval(HindiMap)
 
@@ -77,8 +84,8 @@ for i in range(len(allTweets)):
 
 tweetID = 0
 
-print 'Original       :', ' '.join(map(lambda x : x[0], allTweets[tweetID]))
-print 'Cleaned        :', ' '.join(map(lambda x : x[1], allTweets[tweetID]))
+#print 'Original       :', ' '.join(map(lambda x : x[0], allTweets[tweetID]))
+#print 'Cleaned        :', ' '.join(map(lambda x : x[1], allTweets[tweetID]))
 
 fp = open('wordsToTransliterate.txt', 'w')
 
@@ -90,18 +97,19 @@ for tweet in allTweets:
 
 fp.close()
 
-print 'Running transliteration script'
+#print 'Running transliteration script'
 
 ##################################################################
 #
 #	Run Transliteration model (bash script pred.sh)
 #
-process = subprocess.Popen('bash ../transliteration/pred.sh ../transliteration/transliterationModel/ wordsToTransliterate.txt wordsTransliterated.txt ../transliteration/transliterationModel/model.ckpt-66053', shell=True, stdout=subprocess.PIPE)
+
+process = subprocess.Popen('bash ' + os.environ['HINGLISH_ROOT_DIR'] + '/transliteration/pred.sh ' + os.environ['HINGLISH_ROOT_DIR'] + '/transliteration/transliterationModel/ wordsToTransliterate.txt wordsTransliterated.txt ' + os.environ['HINGLISH_ROOT_DIR'] + '/transliteration/transliterationModel/model.ckpt-66053', shell=True, stdout=subprocess.PIPE)
 process.wait()
 #
 ##################################################################
 
-print 'Finished running transliteration script'
+#print 'Finished running transliteration script'
 
 with open('wordsTransliterated.txt', 'r') as fp:
     transliteratedEncoding = fp.readlines()
@@ -115,9 +123,9 @@ for i in range(len(transliteratedEncoding)):
         if ch != '':
             string += devanagariChars[int(ch)]
     transliteratedText.append(string)
-    
+   
 mark = 0
-
+#print transliteratedText
 for i in range(len(allTweets[:])):
     for j in range(len(allTweets[i])):
         englishEncoding = allTweets[i][j][2]
@@ -127,11 +135,11 @@ for i in range(len(allTweets[:])):
         else:
             allTweets[i][j] += [[], ""]
 
-tweetID = 2
+tweetID = 1
 
-print 'Original       :', ' '.join(map(lambda x : x[0], allTweets[tweetID]))
-print 'Cleaned        :', ' '.join(map(lambda x : x[1], allTweets[tweetID]))
-print 'Transliterated :', ' '.join(map(lambda x : x[4], allTweets[tweetID]))
+#print 'Original       :', ' '.join(map(lambda x : x[0], allTweets[tweetID]))
+#print 'Cleaned        :', ' '.join(map(lambda x : x[1], allTweets[tweetID]))
+#print 'Transliterated :', ' '.join(map(lambda x : x[4], allTweets[tweetID]))
 
 
 
@@ -225,8 +233,8 @@ def getHindiModel(rev = False):
 hindiModel = getHindiModel(rev = True)
 englishModel = getEnglishModel(rev = True)
 
-hindiModelFile   = 'models/lm_hi_99_rev'
-englishModelFile = 'models/lm_en_99_rev'
+hindiModelFile   = os.environ['HINGLISH_ROOT_DIR'] + '/lidf/models/lm_hi_99_rev'
+englishModelFile = os.environ['HINGLISH_ROOT_DIR'] + '/lidf/models/lm_en_99_rev'
 
 hindiModel.load_weights(hindiModelFile)
 englishModel.load_weights(englishModelFile)
@@ -254,7 +262,7 @@ except:
 romanIn = np.zeros((len(romanTokens), maxlen, len(EnglishMap)))
 devanagiriIn = np.zeros((len(devanagariTokens), maxlen, len(HindiMap)))
 
-print "Encoding ..."
+#print "Encoding ..."
 sys.stdout.flush()
 
 for j in range(len(romanTokens)):
@@ -379,7 +387,7 @@ lidf.add(keras.layers.Dropout(0.5))
 lidf.add(Dense(3))
 lidf.add(Activation('softmax'))
 
-lidf.load_weights('./models/lidfModel.h5')
+lidf.load_weights(os.environ['HINGLISH_ROOT_DIR'] + '/lidf/models/lidfModel.h5')
 opt = keras.optimizers.Adam(lr = 0.0005)
 lidf.compile(loss = 'categorical_crossentropy', optimizer = opt)
 

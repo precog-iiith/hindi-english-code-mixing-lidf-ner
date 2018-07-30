@@ -4,7 +4,7 @@ export MODEL_DIR=`realpath $1`
 export DEV_SOURCES=`realpath $2`
 
 export PRED_FILE=`realpath $3`
-export MODEL_CKP=$TRANSLITERATION_DIR/$4
+export MODEL_CKP=$4
 echo $MODEL_CKP
 
 CURR_DIR=`pwd`
