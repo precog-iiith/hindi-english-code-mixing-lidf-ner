@@ -7,4 +7,4 @@ Step 2. Change 'vocab\_target' and 'vocab\_source' file path prefix in translite
 
 Check out demo.py for a running example. Delete wordsToTransliterate.txt and wordsTransliterated.txt before running. <br />
 
-export TRANSLITERATION_DIR={{local path to repo}}/Hindi_English_Code_Switching_Tools/transliteration < br />
+export TRANSLITERATION\_DIR={{local path to repo}}/Hindi\_English\_Code\_Switching\_Tools/transliteration <br />
