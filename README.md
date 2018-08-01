@@ -1,6 +1,7 @@
 # Language Identification and Named Entity Recognition in Hinglish Code Mixed Tweets
 Kushagra Singh, Indira Sen, Ponnurangam Kumaraguru <br />
 ACL 2018, SRW <br />
+[Link to paper](http://precog.iiitd.edu.in/pubs/language-identification-named.pdf) <br />
 
 Repository contains<br />
 (i)   Seq2seq based transliterator (Roman to Devanagri)<br />
